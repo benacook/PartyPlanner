@@ -154,7 +154,7 @@ func TestSprocGuestLeft_Fail(t *testing.T) {
 
 func TestSprocGetGuestsAtTable(t *testing.T) {
 	m := NewMock()
- 	m.MockSprocGetGuestsAtTable()
+ 	m.MockSprocGetGuestsAtTable(g.TableNumber)
 
 	r, err := SprocGetGuestsAtTable(1)
 	if err != nil {
@@ -168,9 +168,9 @@ func TestSprocGetGuestsAtTable(t *testing.T) {
 
 func TestSprocGetGuestsAtTable_Fail(t *testing.T) {
 	 m := NewMock()
-	 m.MockSprocGetGuestsAtTable_NoGuests()
+	 m.MockSprocGetGuestsAtTable_NoGuests(g.TableNumber)
 
-	_, err := SprocGetGuestsAtTable(5)
+	_, err := SprocGetGuestsAtTable(g.TableNumber)
 	if err != sql.ErrNoRows {
 		t.Fatal(err)
 	}

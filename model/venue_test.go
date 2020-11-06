@@ -51,7 +51,7 @@ func TestAddVenue_FailUpdateCapacity(t *testing.T) {
 	m := database.NewMock()
 	m.MockSprocAddVenue()
 	m.MockSprocGetAllGuests()
-	m.MockSprocUpdateUsedCapacity_Error()
+	m.MockSprocUpdateUsedCapacity_Error(5)
 	_, err := AddVenue(v)
 	if err == nil {
 		t.Fatalf("expected fail update capacity, got: %v", err)
@@ -84,7 +84,7 @@ func TestVenueAddToUsedCapacity_FailNoVenue(t *testing.T) {
 func TestVenueAddToUsedCapacity_FailToUpdate(t *testing.T) {
 	m := database.NewMock()
 	m.MockSprocGetVenue()
-	m.MockSprocUpdateUsedCapacity_Error()
+	m.MockSprocUpdateUsedCapacity_Error(5)
 	err := VenueAddToUsedCapacity(5)
 	if err == nil {
 		t.Fatalf("expected error on update capacity, got: %v", err)
@@ -104,7 +104,7 @@ func TestVenueSubtractFromUsedCapacity(t *testing.T) {
 func TestVenueSubtractFromUsedCapacity_FailToUpdate(t *testing.T) {
 	m := database.NewMock()
 	m.MockSprocGetVenue()
-	m.MockSprocUpdateUsedCapacity_Error()
+	m.MockSprocUpdateUsedCapacity_Error(-5)
 	err := VenueSubtractFromUsedCapacity(5)
 	if err == nil {
 		t.Fatalf("expected error on update capacity, got: %v", err)

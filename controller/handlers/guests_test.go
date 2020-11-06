@@ -26,7 +26,7 @@ func TestGuestHandler_Put(t *testing.T) {
 	m := database.NewMock()
 	m.MockSprocGetGuestByName()
 	m.MockSprocGetVenue()
-	m.MockSprocGetGuestsAtTable()
+	m.MockSprocGetGuestsAtTable(g.TableNumber)
 	m.MockSprocGetVenue()
 	m.MockSprocUpdateUsedCapacity(0)
 	m.MockSprocGuestArrived()
@@ -60,7 +60,9 @@ func TestGuestHandler_Put_Fail(t *testing.T) {
 	m := database.NewMock()
 	m.MockSprocGetGuestByName()
 	m.MockSprocGetVenue()
-	m.MockSprocGetGuestsAtTable()
+	m.MockSprocGetGuestsAtTable(g.TableNumber)
+	m.MockSprocGetVenue()
+	m.MockSprocUpdateUsedCapacity(0)
 	m.MockSprocGuestArrived_NoGuest()
 	m.MockSprocGetGuestByName()
 
@@ -92,7 +94,7 @@ func TestGuestHandler_PutFailEmptyBody(t *testing.T) {
 	m := database.NewMock()
 	m.MockSprocGetGuestByName()
 	m.MockSprocGetVenue()
-	m.MockSprocGetGuestsAtTable()
+	m.MockSprocGetGuestsAtTable(g.TableNumber)
 	m.MockSprocGuestArrived()
 	m.MockSprocGetGuestByName()
 

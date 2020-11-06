@@ -28,10 +28,11 @@ var (
 func TestGuestListHandler_Post(t *testing.T) {
 	m:= database.NewMock()
 	m.MockSprocGetVenue()
-	m.MockSprocGetGuestsAtTable()
+	m.MockSprocGetGuestsAtTable(g.TableNumber)
 	m.MockSprocAddGuest()
+	m.MockSprocGetGuestByName()
 	m.MockSprocGetVenue()
-	m.MockSprocUpdateUsedCapacity(1)
+	m.MockSprocUpdateUsedCapacity(5)
 
 	req, err := http.NewRequest(http.MethodPost, "/guest_list/"+ g.Name,
 	strings.NewReader("{\"accompanying_guests\":" + strconv.Itoa(
@@ -59,7 +60,7 @@ func TestGuestListHandler_Post(t *testing.T) {
 func TestGuestListHandler_Post_Fail(t *testing.T) {
 	m:= database.NewMock()
 	m.MockSprocGetVenue()
-	m.MockSprocGetGuestsAtTable()
+	m.MockSprocGetGuestsAtTable(g.TableNumber)
 	m.MockSprocAddGuest_Error()
 	m.MockSprocGetVenue()
 	m.MockSprocUpdateUsedCapacity(1)
@@ -115,6 +116,8 @@ func TestGuestListHandler_Delete(t *testing.T) {
 	m := database.NewMock()
 	m.MockSprocGetGuestByName()
 	m.MockSprocRemoveGuest()
+	m.MockSprocGetVenue()
+	m.MockSprocUpdateUsedCapacity( -5)
 
 	req, err := http.NewRequest(http.MethodDelete, "/guest_list/Ben",
 		strings.NewReader(""))

@@ -114,17 +114,17 @@ func (dbMock *DbMock) MockSprocGetVenue_NoVenue() {
 }
 
 //======================================================================================
-func (dbMock *DbMock) MockSprocGetGuestsAtTable() {
+func (dbMock *DbMock) MockSprocGetGuestsAtTable(table int) {
 	query := "call GetGuestsAtTable(?)"
 	rows := mockGuestRows()
-	dbMock.mock.ExpectQuery(query).WithArgs(g.TableNumber).WillReturnRows(rows).
+	dbMock.mock.ExpectQuery(query).WithArgs(table).WillReturnRows(rows).
 		WillReturnError(nil)
 }
 
 //======================================================================================
-func (dbMock *DbMock) MockSprocGetGuestsAtTable_NoGuests() {
+func (dbMock *DbMock) MockSprocGetGuestsAtTable_NoGuests(table int) {
 	query := "call GetGuestsAtTable(?)"
-	dbMock.mock.ExpectQuery(query).WithArgs(5).WillReturnError(sql.ErrNoRows)
+	dbMock.mock.ExpectQuery(query).WithArgs(table).WillReturnError(sql.ErrNoRows)
 }
 
 //======================================================================================
@@ -201,10 +201,10 @@ func (dbMock *DbMock) MockSprocUpdateUsedCapacity(capacity int) {
 }
 
 //======================================================================================
-func (dbMock *DbMock) MockSprocUpdateUsedCapacity_Error() {
+func (dbMock *DbMock) MockSprocUpdateUsedCapacity_Error(capacity int) {
 	query := "call UpdateUsedCapacity(?, ?)"
 
-	dbMock.mock.ExpectExec(query).WithArgs(v.Name, v.Capacity).WillReturnError(sql.ErrNoRows).
+	dbMock.mock.ExpectExec(query).WithArgs(v.Name, capacity).WillReturnError(sql.ErrNoRows).
 		WillReturnResult(sqlmock.NewErrorResult(errors.New(
 			"failed to update capaicty")))
 }
