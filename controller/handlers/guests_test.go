@@ -27,6 +27,8 @@ func TestGuestHandler_Put(t *testing.T) {
 	m.MockSprocGetGuestByName()
 	m.MockSprocGetVenue()
 	m.MockSprocGetGuestsAtTable()
+	m.MockSprocGetVenue()
+	m.MockSprocUpdateUsedCapacity(0)
 	m.MockSprocGuestArrived()
 	m.MockSprocGetGuestByName()
 
