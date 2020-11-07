@@ -2,7 +2,7 @@ package handlers
 
 import (
 	"encoding/json"
-	"github.com/benacook/getGround-technical-task/model/data"
+	"github.com/benacook/GetGround-Assignment/model/data"
 	"io"
 	"net/http"
 )

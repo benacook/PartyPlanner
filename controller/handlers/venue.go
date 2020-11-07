@@ -1,8 +1,8 @@
 package handlers
 
 import (
-	"github.com/benacook/getGround-technical-task/model"
-	"github.com/benacook/getGround-technical-task/model/data"
+	"github.com/benacook/GetGround-Assignment/model"
+	"github.com/benacook/GetGround-Assignment/model/data"
 	"log"
 	"net/http"
 )

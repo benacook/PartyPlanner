@@ -1,7 +1,7 @@
 package handlers
 
 import (
-	"github.com/benacook/getGround-technical-task/model"
+	"github.com/benacook/GetGround-Assignment/model"
 	"github.com/gorilla/mux"
 	"html/template"
 	"log"

@@ -2,8 +2,8 @@ package model
 
 import (
 	"errors"
-	"github.com/benacook/getGround-technical-task/model/data"
-	"github.com/benacook/getGround-technical-task/model/database"
+	"github.com/benacook/GetGround-Assignment/model/data"
+	"github.com/benacook/GetGround-Assignment/model/database"
 	"log"
 	"math"
 )

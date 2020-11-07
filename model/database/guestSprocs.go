@@ -2,7 +2,7 @@ package database
 
 import (
 	"errors"
-	"github.com/benacook/getGround-technical-task/model/data"
+	"github.com/benacook/GetGround-Assignment/model/data"
 	"log"
 )
 

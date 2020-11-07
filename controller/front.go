@@ -1,7 +1,7 @@
 package controller
 
 import (
-	"github.com/benacook/getGround-technical-task/controller/handlers"
+	"github.com/benacook/GetGround-Assignment/controller/handlers"
 	"github.com/gorilla/mux"
 	"net/http"
 )
