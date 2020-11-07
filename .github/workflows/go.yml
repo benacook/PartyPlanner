@@ -41,8 +41,33 @@ jobs:
     name: Check
     steps:
     - uses: actions/checkout@v2
-    - name: Semgrep
-      id: semgrep
+    - name: bug-scan
+      id: bug-scan
       uses: returntocorp/semgrep-action@v1
       with:
-        config: p/r2c-bug-scan p/r2c-ci p/r2c-best-practices p/r2c-security-audit p/gosec
+        config: p/r2c-bug-scan
+    
+    - name: r2c-ci
+      id: r2c-ci
+      uses: returntocorp/semgrep-action@v1
+      with:
+        config: p/r2c-ci
+
+    - name: r2c-best-practices
+      id: r2c-best-practices
+      uses: returntocorp/semgrep-action@v1
+      with:
+        config: p/r2c-best-practices
+        
+    - name: r2c-security-audit
+      id: r2c-security-audit
+      uses: returntocorp/semgrep-action@v1
+      with:
+        config: p/r2c-security-audit
+        
+    - name: p/gosec
+      id: gosec
+      uses: returntocorp/semgrep-action@v1
+      with:
+        config: p/gosec
+        
