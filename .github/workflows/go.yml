@@ -45,4 +45,4 @@ jobs:
       id: semgrep
       uses: returntocorp/semgrep-action@v1
       with:
-        config: r/all
+        config: p/r2c-bug-scan p/r2c-ci p/r2c-best-practices p/r2c-security-audit p/gosec
