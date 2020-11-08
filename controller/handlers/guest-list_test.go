@@ -145,7 +145,7 @@ func TestGuestListHandler_Delete(t *testing.T) {
 func TestGuestListHandler_Delete_Fail(t *testing.T) {
 	m := database.NewMock()
 	m.MockSprocGetGuestByName()
-	m.MockSprocRemoveGuest_NoGuest()
+	m.MockSprocRemoveGuest_Fail()
 
 	req, err := http.NewRequest(http.MethodDelete, "/guest_list/Ben",
 		strings.NewReader(""))

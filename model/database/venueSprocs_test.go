@@ -6,9 +6,20 @@ import (
 )
 
 func TestSprocAddVenue(t *testing.T) {
-	 m := NewMock()
-	 m.MockSprocAddVenue()
+	vv := v
+	vv.Capacity += 10
 
+	m := NewMock()
+	m.MockSprocAddVenue_WithCapacityTables(vv.Capacity, 21)
+	err := SprocAddVenue(vv)
+	if err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestSprocAddVenue2(t *testing.T) {
+	m := NewMock()
+	m.MockSprocAddVenue()
 	err := SprocAddVenue(v)
 	if err != nil {
 		t.Fatal(err)
@@ -16,8 +27,8 @@ func TestSprocAddVenue(t *testing.T) {
 }
 
 func TestSprocAddVenue_Fail(t *testing.T) {
-	 m := NewMock()
-	 m.MockSprocAddVenue_NoVenue()
+	m := NewMock()
+	m.MockSprocAddVenue_NoVenue()
 
 	err := SprocAddVenue(v)
 	if err != sql.ErrNoRows {
@@ -26,8 +37,8 @@ func TestSprocAddVenue_Fail(t *testing.T) {
 }
 
 func TestSprocGetVenue(t *testing.T) {
-	 m := NewMock()
-	 m.MockSprocGetVenue()
+	m := NewMock()
+	m.MockSprocGetVenue()
 
 	_, err := SprocGetVenue()
 	if err != nil {
@@ -37,8 +48,8 @@ func TestSprocGetVenue(t *testing.T) {
 
 
 func TestSprocGetVenue_Fail(t *testing.T) {
-	 m := NewMock()
-	 m.MockSprocGetVenue_NoVenue()
+	m := NewMock()
+	m.MockSprocGetVenue_NoVenue()
 
 	_, err := SprocGetVenue()
 	if err != sql.ErrNoRows {
@@ -48,8 +59,8 @@ func TestSprocGetVenue_Fail(t *testing.T) {
 
 
 func TestSprocDeleteVenue(t *testing.T) {
-	 m := NewMock()
-	 m.MockSprocDeleteVenue()
+	m := NewMock()
+	m.MockSprocDeleteVenue()
 
 	err := SprocDeleteVenue()
 	if err != nil {
@@ -58,8 +69,8 @@ func TestSprocDeleteVenue(t *testing.T) {
 }
 
 func TestSprocDeleteVenue_Fail(t *testing.T) {
-	 m := NewMock()
-	 m.MockSprocDeleteVenue_NoVenue()
+	m := NewMock()
+	m.MockSprocDeleteVenue_NoVenue()
 
 	err := SprocDeleteVenue()
 	if err != sql.ErrNoRows {
@@ -68,8 +79,8 @@ func TestSprocDeleteVenue_Fail(t *testing.T) {
 }
 
 func TestSprocVenueUpdateUsedCapacity(t *testing.T) {
-	 m := NewMock()
-	 m.MockSprocUpdateUsedCapacity(v.Capacity)
+	m := NewMock()
+	m.MockSprocUpdateUsedCapacity(v.Capacity)
 
 	err := SprocVenueUpdateUsedCapacity(v.Name, v.Capacity)
 	if err != nil {
@@ -78,8 +89,8 @@ func TestSprocVenueUpdateUsedCapacity(t *testing.T) {
 }
 
 func TestSprocVenueUpdateUsedCapacity_Fail(t *testing.T) {
-	 m := NewMock()
-	 m.MockSprocUpdateUsedCapacity_Error(v.Capacity)
+	m := NewMock()
+	m.MockSprocUpdateUsedCapacity_Error(v.Capacity)
 
 	err := SprocVenueUpdateUsedCapacity(v.Name, v.Capacity)
 	if err != sql.ErrNoRows {

@@ -17,6 +17,7 @@ func main() {
 	log.Println("running on port 8080")
 	if err :=  http.ListenAndServeTLS(":8080",
 		"server.crt", "server.key", nil); err != nil{
+		database.Db.Close()
 		log.Fatal(err)
 	}
 }

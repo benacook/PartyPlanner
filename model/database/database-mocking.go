@@ -65,6 +65,30 @@ func mockGuestRows() *sqlmock.Rows {
 
 //======================================================================================
 
+//mockGuestRows returns a mocked sql row for a guest that has not arrived at the party.
+func mockGuestRowsNoName() *sqlmock.Rows {
+	rows := sqlmock.NewRows([]string{"id", "name",
+		"additionalguests", "tablenumber", "arrived", "arrivaltime"}).
+		AddRow(g.Id, "", g.AdditionalGuests, g.TableNumber, g.Arrived, g.ArrivalTime)
+
+	return rows
+}
+
+
+//======================================================================================
+
+//mockGuestRowsFullTable returns a mocked sql row for a guest that has not arrived at
+//the party and has enough additional guests to fill an entire table.
+func mockGuestRowsFullTable() *sqlmock.Rows {
+	rows := sqlmock.NewRows([]string{"id", "name",
+		"additionalguests", "tablenumber", "arrived", "arrivaltime"}).
+		AddRow(g.Id, g.Name, v.TableSize - 1, g.TableNumber, g.Arrived, g.ArrivalTime)
+
+	return rows
+}
+
+//======================================================================================
+
 //mockGuestRowsArrived returns a mocked sql row for a guest that has arrived at the party.
 func mockGuestRowsArrived() *sqlmock.Rows {
 	rows := sqlmock.NewRows([]string{"id", "name",
@@ -86,9 +110,28 @@ func mockVenueRows() *sqlmock.Rows {
 }
 
 //======================================================================================
+
+//mockVenueRows returns a mocked sql row for the venue.
+func mockVenueRowsFullVenue() *sqlmock.Rows {
+	rows := sqlmock.NewRows([]string{"id", "name",
+		"capacity", "numberoftables", "tablesize", "nextfreetable", "usedcapacity"}).
+		AddRow(v.Id, v.Name, v.Capacity, v.NumberOfTables, v.TableSize,
+			v.NextFreeTable, v.Capacity)
+	return rows
+}
+
+//======================================================================================
 func (dbMock *DbMock) MockSprocGetGuestByName()  {
 	query := "call GetGuestByName(?)"
 	rows := mockGuestRows()
+	dbMock.mock.ExpectQuery(query).WithArgs(g.Name).WillReturnRows(rows).
+		WillReturnError(nil)
+}
+
+//======================================================================================
+func (dbMock *DbMock) MockSprocGetGuestByName_NoName()  {
+	query := "call GetGuestByName(?)"
+	rows := mockGuestRowsNoName()
 	dbMock.mock.ExpectQuery(query).WithArgs(g.Name).WillReturnRows(rows).
 		WillReturnError(nil)
 }
@@ -108,6 +151,13 @@ func (dbMock *DbMock) MockSprocGetVenue() {
 }
 
 //======================================================================================
+func (dbMock *DbMock) MockSprocGetVenue_FullVenue() {
+	query := "call GetVenue()"
+	rows := mockVenueRowsFullVenue()
+	dbMock.mock.ExpectQuery(query).WillReturnRows(rows).WillReturnError(nil)
+}
+
+//======================================================================================
 func (dbMock *DbMock) MockSprocGetVenue_NoVenue() {
 	query := "call GetVenue()"
 	dbMock.mock.ExpectQuery(query).WillReturnError(sql.ErrNoRows)
@@ -117,6 +167,14 @@ func (dbMock *DbMock) MockSprocGetVenue_NoVenue() {
 func (dbMock *DbMock) MockSprocGetGuestsAtTable(table int) {
 	query := "call GetGuestsAtTable(?)"
 	rows := mockGuestRows()
+	dbMock.mock.ExpectQuery(query).WithArgs(table).WillReturnRows(rows).
+		WillReturnError(nil)
+}
+
+//======================================================================================
+func (dbMock *DbMock) MockSprocGetGuestsAtTable_FullTable(table int) {
+	query := "call GetGuestsAtTable(?)"
+	rows := mockGuestRowsFullTable()
 	dbMock.mock.ExpectQuery(query).WithArgs(table).WillReturnRows(rows).
 		WillReturnError(nil)
 }
@@ -217,7 +275,7 @@ func (dbMock *DbMock) MockSprocRemoveGuest() {
 }
 
 //======================================================================================
-func (dbMock *DbMock) MockSprocRemoveGuest_NoGuest() {
+func (dbMock *DbMock) MockSprocRemoveGuest_Fail() {
 	query := "call RemoveGuest(?)"
 	dbMock.mock.ExpectExec(query).WithArgs(g.Name).WillReturnError(sql.ErrNoRows).
 		WillReturnResult(
@@ -243,6 +301,15 @@ func (dbMock *DbMock) MockSprocAddVenue() {
 	query := "call AddVenue(?, ?, ?, ?)"
 
 	dbMock.mock.ExpectExec(query).WithArgs(v.Name, v.Capacity, v.NumberOfTables,
+		v.TableSize).WillReturnError(nil).WillReturnResult(
+		sqlmock.NewResult(1, 1))
+}
+
+//======================================================================================
+func (dbMock *DbMock) MockSprocAddVenue_WithCapacityTables(capacity, tables int) {
+	query := "call AddVenue(?, ?, ?, ?)"
+
+	dbMock.mock.ExpectExec(query).WithArgs(v.Name, capacity, tables,
 		v.TableSize).WillReturnError(nil).WillReturnResult(
 		sqlmock.NewResult(1, 1))
 }

@@ -37,12 +37,22 @@ func TestSprocGetGuestByName(t *testing.T) {
 }
 
 
-func TestSprocGetGuestByName_Fail(t *testing.T) {
+func TestSprocGetGuestByName_FailNoGuest(t *testing.T) {
 	m := NewMock()
 	m.MockSprocGetGuestByName_NoGuest()
 
 	_, err := SprocGetGuestByName("Ben")
 	if err != sql.ErrNoRows {
+		t.Fatal(err)
+	}
+}
+
+func TestSprocGetGuestByName_FailNoName(t *testing.T) {
+	m := NewMock()
+	m.MockSprocGetGuestByName_NoName()
+
+	_, err := SprocGetGuestByName("Ben")
+	if err == nil {
 		t.Fatal(err)
 	}
 }
@@ -83,8 +93,8 @@ func TestSprocGetArrivedGuests(t *testing.T) {
 }
 
 func TestSprocGetArrivedGuests_Fail(t *testing.T) {
-	 m := NewMock()
-	 m.MockSprocGetArrivedGuests_NoGuests()
+	m := NewMock()
+	m.MockSprocGetArrivedGuests_NoGuests()
 
 	_, err := SprocGetArrivedGuests()
 	if err != sql.ErrNoRows {
@@ -93,8 +103,8 @@ func TestSprocGetArrivedGuests_Fail(t *testing.T) {
 }
 
 func TestSprocRemoveGuest(t *testing.T) {
-	 m := NewMock()
-	 m.MockSprocRemoveGuest()
+	m := NewMock()
+	m.MockSprocRemoveGuest()
 
 	err := SprocRemoveGuest(g.Name)
 	if err != nil {
@@ -103,8 +113,8 @@ func TestSprocRemoveGuest(t *testing.T) {
 }
 
 func TestSprocRemoveGuest_Fail(t *testing.T) {
-	 m := NewMock()
-	 m.MockSprocRemoveGuest_NoGuest()
+	m := NewMock()
+	m.MockSprocRemoveGuest_Fail()
 
 	err := SprocRemoveGuest(g.Name)
 	if err != sql.ErrNoRows {
@@ -113,8 +123,8 @@ func TestSprocRemoveGuest_Fail(t *testing.T) {
 }
 
 func TestSprocGuestArrived(t *testing.T) {
-	 m := NewMock()
-	 m.MockSprocGuestArrived()
+	m := NewMock()
+	m.MockSprocGuestArrived()
 
 	err := SprocGuestArrived(g.Name, g.AdditionalGuests)
 	if err != nil {
@@ -123,8 +133,8 @@ func TestSprocGuestArrived(t *testing.T) {
 }
 
 func TestSprocGuestArrived_Fail(t *testing.T) {
-	 m := NewMock()
-	 m.MockSprocGuestArrived_NoGuest()
+	m := NewMock()
+	m.MockSprocGuestArrived_NoGuest()
 
 	err := SprocGuestArrived(g.Name, g.AdditionalGuests)
 	if err != sql.ErrNoRows {
@@ -133,8 +143,8 @@ func TestSprocGuestArrived_Fail(t *testing.T) {
 }
 
 func TestSprocGuestLeft(t *testing.T) {
-	 m := NewMock()
-	 m.MockSprocGuestLeft()
+	m := NewMock()
+	m.MockSprocGuestLeft()
 
 	err := SprocGuestLeft(g.Name)
 	if err != nil {
@@ -143,8 +153,8 @@ func TestSprocGuestLeft(t *testing.T) {
 }
 
 func TestSprocGuestLeft_Fail(t *testing.T) {
-	 m := NewMock()
-	 m.MockSprocGuestLeft_NoGuest()
+	m := NewMock()
+	m.MockSprocGuestLeft_NoGuest()
 
 	err := SprocGuestLeft(g.Name)
 	if err != sql.ErrNoRows {
@@ -167,8 +177,8 @@ func TestSprocGetGuestsAtTable(t *testing.T) {
 }
 
 func TestSprocGetGuestsAtTable_Fail(t *testing.T) {
-	 m := NewMock()
-	 m.MockSprocGetGuestsAtTable_NoGuests(g.TableNumber)
+	m := NewMock()
+	m.MockSprocGetGuestsAtTable_NoGuests(g.TableNumber)
 
 	_, err := SprocGetGuestsAtTable(g.TableNumber)
 	if err != sql.ErrNoRows {
