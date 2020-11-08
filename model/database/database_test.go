@@ -3,14 +3,6 @@ package database
 import "testing"
 
 //======================================================================================
-func TestInit(t *testing.T) {
-	if err := Init(); err != nil{
-		t.Fatal(err)
-	}
-	Db.Close()
-}
-
-//======================================================================================
 func TestNewDatabase(t *testing.T) {
 	db, err := NewDatabase("mysql", dbConStr)
 	db.Close()
