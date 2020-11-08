@@ -1,7 +1,7 @@
 # GetGround-technical-task
 
 ## Test Coverage
-[![](https://github.com/fxamacker/cbor/workflows/cover%20%E2%89%A598%25/badge.svg)](https://github.com/fxamacker/cbor/actions?query=workflow%3A%22cover+%E2%89%A598%25%22)
+[![](https://github.com/fxamacker/cbor/workflows/cover%20%E2%89%A595%25/badge.svg)](https://github.com/fxamacker/cbor/actions?query=workflow%3A%22cover+%E2%89%A598%25%22)
 
 ## About
 This API gives the user the ability to plan a party!  
