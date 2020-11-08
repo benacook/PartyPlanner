@@ -63,6 +63,11 @@ func (h *InviteHandler) Get(w http.ResponseWriter, r *http.Request) {
 
 	tmpl := template.Must(template.ParseFiles("invite.html"))
 	f, err := os.Create("./" + g.Name + ".html")
+	if err != nil {
+		log.Println(err)
+		w.WriteHeader(http.StatusInternalServerError)
+		w.Write([]byte("failed to generate invite file"))
+	}
 	defer f.Close()
 	tmpl.Execute(f, inv)
 

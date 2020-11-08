@@ -42,6 +42,19 @@ func TestAddGuest_FailAdd(t *testing.T) {
 	}
 }
 
+func TestAddGuest_FailGetAddedGuest(t *testing.T) {
+	m := database.NewMock()
+	m.MockSprocGetVenue()
+	m.MockSprocGetGuestsAtTable(guest.TableNumber)
+	m.MockSprocAddGuest()
+	m.MockSprocGetGuestByName_NoGuest()
+	m.MockSprocUpdateUsedCapacity(guest.AdditionalGuests + 1)
+	_, err := AddGuest(guest)
+	if err == nil {
+		t.Fatal(err)
+	}
+}
+
 func TestAddGuest_FailNoVenue(t *testing.T) {
 	m := database.NewMock()
 	m.MockSprocGetVenue_NoVenue()
@@ -149,6 +162,17 @@ func TestGuestArrival(t *testing.T) {
 	m.MockSprocGetGuestByName()
 	_, err := GuestArrival(guest)
 	if err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestGuestArrival_FailTable(t *testing.T) {
+	m := database.NewMock()
+	m.MockSprocGetGuestByName()
+	m.MockSprocGetVenue()
+	m.MockSprocGetGuestsAtTable_NoGuests(guest.TableNumber)
+	_, err := GuestArrival(guest)
+	if err == nil {
 		t.Fatal(err)
 	}
 }

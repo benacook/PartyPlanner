@@ -96,6 +96,12 @@ func AddGuest(guest data.Guest) (data.Guest, error) {
 	}
 
 	g, err := GetGuest(guest.Name)
+	if err != nil {
+		log.Println(err)
+		err = errors.New(
+			"error: failed to get the new guest back from the database")
+		return data.Guest{}, err
+	}
 
 	VenueAddToUsedCapacity(g.AdditionalGuests + 1)
 
@@ -189,6 +195,10 @@ func GuestArrival(guest data.Guest) (data.Guest, error) {
 	}
 
 	space, err := getSpaceOnTable(g.TableNumber, v)
+	if err != nil {
+		return data.Guest{}, err
+	}
+
 	extraGuests := int(math.Abs(float64(g.AdditionalGuests - guest.
 		AdditionalGuests)))
 
