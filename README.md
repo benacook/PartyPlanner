@@ -1,4 +1,9 @@
 # GetGround-technical-task
+
+## Test Coverage
+[![](https://github.com/fxamacker/cbor/workflows/cover%20%E2%89%A598%25/badge.svg)](https://github.com/fxamacker/cbor/actions?query=workflow%3A%22cover+%E2%89%A598%25%22)
+
+## About
 This API gives the user the ability to plan a party!  
 Guests cannot be added to the guest list until a venue has been added, as this is used
 to calculate if the guests and their entourage can fit on a table and in the venue
@@ -11,7 +16,7 @@ To add a guest, the user specifies a preferred table number, but if this table d
  not have the capacity to accommodate them, the system will try to find a free table
   to put them on. If there is no table they can fit on, an error will be returned. Try
    splitting them into two separate guests.
-##API Documentation
+## API Documentation
 ### Add a guest to the guestlist
 
 If there is insufficient space at the specified table, then it will attempt to find a
