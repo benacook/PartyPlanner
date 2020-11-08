@@ -3,24 +3,7 @@ package database
 import "testing"
 
 //======================================================================================
-func TestNewDatabase(t *testing.T) {
-	db, err := NewDatabase("mysql", dbConStr)
-	db.Close()
-	if err != nil {
-		t.Fatal(err)
-	}
-}
-
-//======================================================================================
 func TestNewDatabase_Fail(t *testing.T) {
-	_, err := NewDatabase("mysql", "")
-	if err == nil {
-		t.Fatal(err)
-	}
-}
-
-//======================================================================================
-func TestNewDatabase_Fail2(t *testing.T) {
 	_, err := NewDatabase("", dbConStr)
 	if err == nil {
 		t.Fatal(err)
@@ -34,11 +17,8 @@ func TestDatabase_Close(t *testing.T) {
 			t.Fatal("The went into panic")
 		}
 	}()
-	db, err := NewDatabase("mysql", dbConStr)
-	if err != nil {
-		t.Fatal(err)
-	}
-	db.Close()
+	NewMock()
+	Db.Close()
 }
 
 //======================================================================================
@@ -49,6 +29,6 @@ func TestDatabase_Close_Fail(t *testing.T) {
 			t.Fatal("The went into panic")
 		}
 	}()
-	db, _ := NewDatabase("mysql", "")
+	db, _ := NewDatabase("", "")
 	db.Close()
 }
