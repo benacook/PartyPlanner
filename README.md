@@ -1,7 +1,7 @@
 # GetGround-technical-task
 
 ## Test Coverage
-[![](https://github.com/fxamacker/cbor/workflows/cover%20%E2%89%A595%25/badge.svg)](https://github.com/fxamacker/cbor/actions?query=workflow%3A%22cover+%E2%89%A595%25%22)
+<a href='https://github.com/jpoles1/gopherbadger' target='_blank'>![gopherbadger-tag-do-not-edit](https://img.shields.io/badge/Go%20Coverage-95%25-brightgreen.svg?longCache=true&style=flat)</a>
 
 ## About
 This API gives the user the ability to plan a party!  
