@@ -27,6 +27,7 @@ func TestAddVenue(t *testing.T) {
 	m.MockSprocGetVenue()
 	vv := v
 	vv.UsedCapacity = 195
+
 	_, err := AddVenue(vv)
 	if err != nil {
 		t.Fatalf("expected no error, got: %v", err)
