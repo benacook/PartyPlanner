@@ -23,11 +23,12 @@
 					}
 				},
 				"url": {
-					"raw": "localhost:8080/venue",
+					"raw": "https://localhost:8000/venue",
+					"protocol": "https",
 					"host": [
 						"localhost"
 					],
-					"port": "8080",
+					"port": "8000",
 					"path": [
 						"venue"
 					]
@@ -56,11 +57,12 @@
 					}
 				},
 				"url": {
-					"raw": "localhost:8080/venue",
+					"raw": "https://localhost:8000/venue",
+					"protocol": "https",
 					"host": [
 						"localhost"
 					],
-					"port": "8080",
+					"port": "8000",
 					"path": [
 						"venue"
 					]
@@ -86,11 +88,12 @@
 					}
 				},
 				"url": {
-					"raw": "localhost:8080/venue",
+					"raw": "https://localhost:8000/venue",
+					"protocol": "https",
 					"host": [
 						"localhost"
 					],
-					"port": "8080",
+					"port": "8000",
 					"path": [
 						"venue"
 					]
@@ -116,11 +119,12 @@
 					}
 				},
 				"url": {
-					"raw": "localhost:8080/guest_list/Ben",
+					"raw": "https://localhost:8000/guest_list/Ben",
+					"protocol": "https",
 					"host": [
 						"localhost"
 					],
-					"port": "8080",
+					"port": "8000",
 					"path": [
 						"guest_list",
 						"Ben"
@@ -147,11 +151,12 @@
 					}
 				},
 				"url": {
-					"raw": "localhost:8080/guest_list/Ben",
+					"raw": "https://localhost:8000/guest_list/Ben",
+					"protocol": "https",
 					"host": [
 						"localhost"
 					],
-					"port": "8080",
+					"port": "8000",
 					"path": [
 						"guest_list",
 						"Ben"
@@ -181,11 +186,12 @@
 					}
 				},
 				"url": {
-					"raw": "localhost:8080/guest_list",
+					"raw": "https://localhost:8000/guest_list",
+					"protocol": "https",
 					"host": [
 						"localhost"
 					],
-					"port": "8080",
+					"port": "8000",
 					"path": [
 						"guest_list"
 					]
@@ -208,30 +214,12 @@
 					}
 				},
 				"url": {
-					"raw": "localhost:8080/guests/ben",
+					"raw": "https://localhost:8000/guests/ben",
+					"protocol": "https",
 					"host": [
 						"localhost"
 					],
-					"port": "8080",
-					"path": [
-						"guests",
-						"ben"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Guest Leaves",
-			"request": {
-				"method": "DELETE",
-				"header": [],
-				"url": {
-					"raw": "localhost:8080/guests/ben",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
+					"port": "8000",
 					"path": [
 						"guests",
 						"ben"
@@ -246,13 +234,34 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "localhost:8080/guests",
+					"raw": "https://localhost:8000/guests",
+					"protocol": "https",
 					"host": [
 						"localhost"
 					],
-					"port": "8080",
+					"port": "8000",
 					"path": [
 						"guests"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Guest Leaves",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:8000/guests/ben",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"guests",
+						"ben"
 					]
 				}
 			},
@@ -264,11 +273,12 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "localhost:8080/seats_empty",
+					"raw": "https://localhost:8000/seats_empty",
+					"protocol": "https",
 					"host": [
 						"localhost"
 					],
-					"port": "8080",
+					"port": "8000",
 					"path": [
 						"seats_empty"
 					]
@@ -282,11 +292,12 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "localhost:8080/seats_bookable",
+					"raw": "https://localhost:8000/seats_bookable",
+					"protocol": "https",
 					"host": [
 						"localhost"
 					],
-					"port": "8080",
+					"port": "8000",
 					"path": [
 						"seats_bookable"
 					]
@@ -300,11 +311,12 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "localhost:8080/invitation/ben",
+					"raw": "https://localhost:8000/invitation/ben",
+					"protocol": "https",
 					"host": [
 						"localhost"
 					],
-					"port": "8080",
+					"port": "8000",
 					"path": [
 						"invitation",
 						"ben"
