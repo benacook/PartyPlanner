@@ -27,7 +27,7 @@ func AddVenue(venue data.Venue) (data.Venue, error)  {
 
 	if err := database.SprocAddVenue(venue); err != nil{
 		log.Println(err)
-		err = errors.New("error: could not add venue")
+		err = errors.New(" could not add venue")
 		return data.Venue{}, err
 	}
 
@@ -44,7 +44,7 @@ func AddVenue(venue data.Venue) (data.Venue, error)  {
 	err = database.SprocVenueUpdateUsedCapacity(venue.Name, venue.UsedCapacity)
 	if err != nil{
 		log.Println(err)
-		err = errors.New("error: could not update used capacity" +
+		err = errors.New(" could not update used capacity" +
 			"from existing guest list")
 		return data.Venue{}, err
 	}
@@ -65,7 +65,7 @@ func GetVenue() (data.Venue, error)  {
 	v, err := database.SprocGetVenue()
 	if err != nil{
 		log.Println(err)
-		err = errors.New("error: could not get venue")
+		err = errors.New(" could not get venue")
 		return data.Venue{}, err
 	}
 	return v, nil
@@ -86,7 +86,7 @@ func VenueAddToUsedCapacity(guests int) error{
 	err = database.SprocVenueUpdateUsedCapacity(v.Name, v.UsedCapacity)
 	if err != nil{
 		log.Println(err)
-		err = errors.New("error: could not update used venue capacity")
+		err = errors.New(" could not update used venue capacity")
 		return err
 	}
 	return nil
@@ -107,7 +107,7 @@ func VenueSubtractFromUsedCapacity(guests int) error{
 	err = database.SprocVenueUpdateUsedCapacity(v.Name, v.UsedCapacity)
 	if err != nil{
 		log.Println(err)
-		err = errors.New("error: could not update used venue capacity")
+		err = errors.New(" could not update used venue capacity")
 		return err
 	}
 	return nil
@@ -121,7 +121,7 @@ func DeleteVenue() error  {
 	err := database.SprocDeleteVenue()
 	if err != nil{
 		log.Println(err)
-		err = errors.New("error: could not delete venue")
+		err = errors.New(" could not delete venue")
 		return err
 	}
 	return nil

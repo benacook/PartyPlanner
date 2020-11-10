@@ -31,12 +31,10 @@ func (h *VenueHandler) Get(w http.ResponseWriter, r *http.Request) {
 	v, err := model.GetVenue()
 	if err != nil {
 		log.Println(err)
-		w.WriteHeader(http.StatusInternalServerError)
-		w.Write([]byte(err.Error()))
+		respondWithError(err, http.StatusInternalServerError, w)
 		return
 	}
-	w.WriteHeader(http.StatusOK)
-	encodeResponseAsJSON(v, w)
+	encodeResponseAsJSON(v, http.StatusOK, w)
 }
 
 //======================================================================================
@@ -48,13 +46,11 @@ func (h *VenueHandler) GetSeats(w http.ResponseWriter, r *http.Request) {
 	numSeats, err := model.GetRemainingSeats()
 	if err != nil {
 		log.Println(err)
-		w.WriteHeader(http.StatusInternalServerError)
-		w.Write([]byte(err.Error()))
+		respondWithError(err, http.StatusInternalServerError, w)
 		return
 	}
-	es := data.EmptySeats{numSeats}
-	w.WriteHeader(http.StatusOK)
-	encodeResponseAsJSON(es, w)
+	es := data.EmptySeats{SeatsEmpty: numSeats}
+	encodeResponseAsJSON(es, http.StatusOK, w)
 }
 
 //======================================================================================
@@ -67,13 +63,11 @@ func (h *VenueHandler) GetBookableSeats(w http.ResponseWriter, r *http.Request) 
 	numSeats, err := model.GetRemainingBookableSeats()
 	if err != nil {
 		log.Println(err)
-		w.WriteHeader(http.StatusInternalServerError)
-		w.Write([]byte(err.Error()))
+		respondWithError(err, http.StatusInternalServerError, w)
 		return
 	}
-	es := data.EmptySeats{numSeats}
-	w.WriteHeader(http.StatusOK)
-	encodeResponseAsJSON(es, w)
+	es := data.EmptySeats{SeatsEmpty: numSeats}
+	encodeResponseAsJSON(es, http.StatusOK, w)
 }
 
 //======================================================================================
@@ -92,23 +86,20 @@ func (h *VenueHandler) Put(w http.ResponseWriter, r *http.Request) {
 //Status 500 is returned for errors parsing the user data.
 //Status 400 is returned if adding the venue fails.
 func (h *VenueHandler) Post(w http.ResponseWriter, r *http.Request) {
-	v, err := ParseRequestVenue(r)
+	v, err := data.ParseRequestVenue(r)
 	if err != nil {
 		log.Println(err)
-		w.WriteHeader(http.StatusInternalServerError)
-		w.Write([]byte("could not parse body"))
+		respondWithError(err, http.StatusInternalServerError, w)
 		return
 	}
 
 	newVenue, err := model.AddVenue(v)
 	if err != nil {
 		log.Println(err)
-		w.WriteHeader(http.StatusBadRequest)
-		w.Write([]byte(err.Error()))
+		respondWithError(err, http.StatusBadRequest, w)
 		return
 	}
-	w.WriteHeader(http.StatusCreated)
-	encodeResponseAsJSON(newVenue, w)
+	encodeResponseAsJSON(newVenue, http.StatusCreated, w)
 }
 
 //======================================================================================
@@ -120,8 +111,7 @@ func (h *VenueHandler) Post(w http.ResponseWriter, r *http.Request) {
 //Status 500 is returned if the delete fails.
 func (h *VenueHandler) Delete(w http.ResponseWriter, r *http.Request) {
 	if err := model.DeleteVenue(); err != nil {
-		w.WriteHeader(http.StatusInternalServerError)
-		w.Write([]byte(err.Error()))
+		respondWithError(err, http.StatusInternalServerError, w)
 		return
 	}
 

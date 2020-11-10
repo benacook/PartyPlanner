@@ -17,7 +17,7 @@ func getSpaceOnTable(table int, venue data.Venue) (int, error) {
 	guests, err := database.SprocGetGuestsAtTable(table)
 	if err != nil {
 		log.Println(err)
-		err = errors.New("error: failed to get guests at the table")
+		err = errors.New("failed to get guests at the table")
 		return 0, err
 	}
 
@@ -66,7 +66,7 @@ func AddGuest(guest data.Guest) (data.Guest, error) {
 	v, err := GetVenue()
 	if err != nil {
 		log.Println(err)
-		err = errors.New("error: could not get venue, maybe no venue exists")
+		err = errors.New("could not get venue, maybe no venue exists")
 		return data.Guest{}, err
 	}
 
@@ -91,7 +91,7 @@ func AddGuest(guest data.Guest) (data.Guest, error) {
 	err = database.SprocAddGuest(guest)
 	if err != nil {
 		log.Println(err)
-		err = errors.New("error: failed to add guest")
+		err = errors.New("failed to add guest")
 		return data.Guest{}, err
 	}
 
@@ -99,7 +99,7 @@ func AddGuest(guest data.Guest) (data.Guest, error) {
 	if err != nil {
 		log.Println(err)
 		err = errors.New(
-			"error: failed to get the new guest back from the database")
+			" failed to get the new guest back from the database")
 		return data.Guest{}, err
 	}
 
@@ -117,7 +117,7 @@ func GetGuest(name string) (data.Guest, error) {
 	g, err := database.SprocGetGuestByName(name)
 	if err != nil{
 		log.Println(err)
-		err = errors.New("error: no guest by that name")
+		err = errors.New(" no guest by that name")
 		return data.Guest{}, err
 	}
 	return g, nil
@@ -131,7 +131,7 @@ func GetAllGuests() ([]data.Guest, error){
 	guests, err := database.SprocGetAllGuests()
 	if err != nil {
 		log.Println(err)
-		err = errors.New("error: could not get guest list")
+		err = errors.New(" could not get guest list")
 		return []data.Guest{}, err
 	}
 	return guests, nil
@@ -145,7 +145,7 @@ func GetArrivedGuests() ([]data.Guest, error){
 	guests, err := database.SprocGetArrivedGuests()
 	if err != nil {
 		log.Println(err)
-		err = errors.New("error: could not get arrived guests")
+		err = errors.New(" could not get arrived guests")
 		return []data.Guest{}, err
 	}
 	return guests, nil
@@ -164,7 +164,7 @@ func DeleteGuest(guest data.Guest) error {
 	}
 	err = database.SprocRemoveGuest(g.Name)
 	if err != nil {
-		err = errors.New("error: could not remove guest")
+		err = errors.New(" could not remove guest")
 		log.Println(err)
 		return err
 	}
@@ -204,7 +204,7 @@ func GuestArrival(guest data.Guest) (data.Guest, error) {
 
 	if extraGuests > space{
 		return data.Guest{}, errors.New(
-			"error: not all guests can fit on the table")
+			" not all guests can fit on the table")
 	}
 
 	if err := VenueAddToUsedCapacity(extraGuests); err != nil{
@@ -214,7 +214,7 @@ func GuestArrival(guest data.Guest) (data.Guest, error) {
 	err = database.SprocGuestArrived(guest.Name, guest.AdditionalGuests)
 	if err != nil {
 		log.Println(err)
-		err = errors.New("error: could not mark guest as arrived")
+		err = errors.New(" could not mark guest as arrived")
 		return data.Guest{}, err
 	}
 
@@ -233,12 +233,12 @@ func GuestLeaves(guest data.Guest) error {
 	_, err := database.SprocGetGuestByName(guest.Name)
 	if err != nil {
 		log.Println(err)
-		err = errors.New("error: could not get guest by that name")
+		err = errors.New(" could not get guest by that name")
 		return err
 	}
 	err = database.SprocGuestLeft(guest.Name)
 	if err != nil {
-		err = errors.New("error: failed to mark guest as departed")
+		err = errors.New(" failed to mark guest as departed")
 		log.Println(err)
 		return err
 	}

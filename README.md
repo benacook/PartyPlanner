@@ -71,7 +71,7 @@ Example error response:
 status: 400
 response: 
 {
-    "error: no guest by that name"
+    " no guest by that name"
 }
 ```
 
@@ -102,7 +102,7 @@ Example error response:
 status: 500
 response: 
 {
-    "error: could not get guest list"
+    " could not get guest list"
 }
 ```
 ### Generate an invitation
@@ -158,7 +158,7 @@ Example error response:
 status: 400
 response:
 {
-    "error: no guest by that name"
+    " no guest by that name"
 }
 ```
 
@@ -182,7 +182,7 @@ Example error response:
 status:400
 response:
 {
-    "error: could not get guest by that name"
+    " could not get guest by that name"
 }
 ```
 
@@ -295,7 +295,7 @@ Example error response:
 status: 500
 response:
 {
-    "error: could not get venue"
+    " could not get venue"
 }
 ```
 

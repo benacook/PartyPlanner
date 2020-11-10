@@ -33,12 +33,11 @@ func (h *GuestHandler) Get(w http.ResponseWriter, r *http.Request) {
 	guests, err := model.GetArrivedGuests()
 	if err != nil {
 		log.Println(err)
-		w.WriteHeader(http.StatusInternalServerError)
+		respondWithError(err, http.StatusInternalServerError, w)
 		return
 	}
-	g := data.GuestList{guests}
-	w.WriteHeader(http.StatusOK)
-	encodeResponseAsJSON(g, w)
+	g := data.GuestList{Guests: guests}
+	encodeResponseAsJSON(g, http.StatusOK, w)
 }
 
 //======================================================================================
@@ -52,11 +51,11 @@ func (h *GuestHandler) Get(w http.ResponseWriter, r *http.Request) {
 func (h *GuestHandler) Put(w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
 	name := vars["name"]
-	g, err := ParseRequestGuest(r)
+	g, err := data.ParseRequestGuest(r)
 
 	if err != nil {
 		log.Println(err)
-		w.WriteHeader(http.StatusInternalServerError)
+		respondWithError(err, http.StatusInternalServerError, w)
 		return
 	}
 	g.Name = name
@@ -64,12 +63,10 @@ func (h *GuestHandler) Put(w http.ResponseWriter, r *http.Request) {
 	g, err = model.GuestArrival(g)
 	if err != nil{
 		log.Println(err)
-		w.WriteHeader(http.StatusBadRequest)
-		w.Write([]byte(err.Error()))
+		respondWithError(err, http.StatusBadRequest, w)
 		return
 	}
-	w.WriteHeader(http.StatusAccepted)
-	encodeResponseAsJSON(g, w)
+	encodeResponseAsJSON(g, http.StatusAccepted, w)
 }
 
 //======================================================================================
@@ -93,10 +90,8 @@ func (h *GuestHandler) Delete(w http.ResponseWriter, r *http.Request) {
 
 	if err := model.GuestLeaves(g); err != nil{
 		log.Println(err)
-		w.WriteHeader(http.StatusBadRequest)
-		w.Write([]byte(err.Error()))
+		respondWithError(err, http.StatusBadRequest, w)
 		return
 	}
-	w.WriteHeader(http.StatusAccepted)
-	w.Write([]byte("Guest left the party"))
+	respondWithMessage("Guest left the party", http.StatusAccepted, w)
 }

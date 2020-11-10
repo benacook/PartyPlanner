@@ -46,16 +46,15 @@ func (h *InviteHandler) Get(w http.ResponseWriter, r *http.Request) {
 	v, err := model.GetVenue()
 	if err != nil {
 		log.Println(err)
-		w.WriteHeader(http.StatusInternalServerError)
-		w.Write([]byte("no venue set"))
+		respondWithMessage("no venue set", http.StatusInternalServerError, w)
 		return
 	}
 
 	g, err := model.GetGuest(name)
 	if err != nil {
 		log.Println(err)
-		w.WriteHeader(http.StatusInternalServerError)
-		w.Write([]byte("no guest by that name"))
+		respondWithMessage("no guest by that name",
+			http.StatusInternalServerError, w)
 		return
 	}
 
@@ -71,10 +70,15 @@ func (h *InviteHandler) Get(w http.ResponseWriter, r *http.Request) {
 	defer f.Close()
 	tmpl.Execute(f, inv)
 
+	hdr := make(map[string]string)
+	for key, value := range headers {
+		hdr[key] = value
+	}
 
-	w.Header().Set("Content-Disposition", "attachment; filename="+strconv.Quote(
-		"test.html"))
-	w.Header().Set("Content-Type", "application/octet-stream")
+	hdr["Content-Type"] = "application/octet-stream"
+	hdr["Content-Disposition"] = "attachment; filename="+strconv.Quote("test.html")
+	httpAddHeaders(hdr, w)
+
 	http.ServeFile(w, r, f.Name())
 	os.Remove("./" + f.Name())
 }

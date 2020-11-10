@@ -33,14 +33,12 @@ func (h *GuestListHandler) Get(w http.ResponseWriter, r *http.Request) {
 	guests, err := model.GetAllGuests()
 	if err != nil {
 		log.Println(err)
-		w.WriteHeader(http.StatusInternalServerError)
-		w.Write([]byte(err.Error()))
+		respondWithError(err, http.StatusInternalServerError, w)
 		return
 	}
 
 	gl := data.GuestList{guests}
-	w.WriteHeader(http.StatusOK)
-	encodeResponseAsJSON(gl, w)
+	encodeResponseAsJSON(gl, http.StatusOK, w)
 }
 
 //======================================================================================
@@ -62,11 +60,10 @@ func (h *GuestListHandler) Post(w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
 	name := vars["name"]
 
-	g, err := ParseRequestGuest(r)
+	g, err := data.ParseRequestGuest(r)
 	if err != nil {
 		log.Println(err)
-		w.WriteHeader(http.StatusInternalServerError)
-		w.Write([]byte(err.Error()))
+		respondWithError(err, http.StatusInternalServerError, w)
 		return
 	}
 	g.Name = name
@@ -74,13 +71,10 @@ func (h *GuestListHandler) Post(w http.ResponseWriter, r *http.Request) {
 	result, err := model.AddGuest(g)
 	if err != nil{
 		log.Println(err)
-		w.WriteHeader(http.StatusBadRequest)
-		w.Write([]byte(err.Error()))
+		respondWithError(err, http.StatusBadRequest, w)
 		return
 	}
-
-	w.WriteHeader(http.StatusCreated)
-	encodeResponseAsJSON(result, w)
+	encodeResponseAsJSON(result, http.StatusCreated, w)
 }
 
 //======================================================================================
@@ -98,10 +92,8 @@ func (h *GuestListHandler) Delete(w http.ResponseWriter, r *http.Request) {
 
 	if err := model.DeleteGuest(g); err != nil{
 		log.Println(err)
-		w.WriteHeader(http.StatusBadRequest)
-		w.Write([]byte(err.Error()))
+		respondWithError(err, http.StatusBadRequest, w)
 		return
 	}
-	w.WriteHeader(http.StatusAccepted)
-	w.Write([]byte("Guest removed"))
+	respondWithMessage("Guest removed", http.StatusAccepted, w)
 }

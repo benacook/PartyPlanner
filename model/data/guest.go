@@ -1,5 +1,10 @@
 package data
 
+import (
+	"encoding/json"
+	"net/http"
+)
+
 //======================================================================================
 
 //Guest struct contains all of the data of a guest on the guest list,
@@ -18,4 +23,19 @@ type Guest struct {
 //GuestList contains a slice of Guest.
 type GuestList struct {
 	Guests []Guest
+}
+
+//======================================================================================
+
+//ParseRequestGuest parses a http request to a guest struct.
+//Returns a guest struct containing the parsed data and a nil error if successful.
+//Returns a blank guest struct and an error if parsing fails.
+func ParseRequestGuest(r *http.Request) (Guest, error) {
+	dec := json.NewDecoder(r.Body)
+	var g Guest
+	err := dec.Decode(&g)
+	if err != nil {
+		return Guest{}, err
+	}
+	return g, nil
 }
