@@ -10,7 +10,7 @@ import (
 const (
 	dbUser string = "party-app"
 	dbPassword string = "4321"
-	dbName string = "getground-party"
+	dbName string = "PartyPlanner-party"
 	dbConStr string  =
 	dbUser + ":"+ dbPassword + "" +
 		"@tcp(127.0.0.1:3306)/" + dbName

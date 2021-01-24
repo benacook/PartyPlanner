@@ -1,7 +1,7 @@
 package database
 
 import (
-	"github.com/benacook/GetGround-Assignment/model/data"
+	"github.com/benacook/PartyPlanner-Assignment/model/data"
 	"log"
 )
 

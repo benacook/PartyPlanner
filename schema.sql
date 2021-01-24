@@ -1,6 +1,6 @@
 -- MySQL dump 10.13  Distrib 5.7.31, for Linux (x86_64)
 --
--- Host: 127.0.0.1    Database: getground-party
+-- Host: 127.0.0.1    Database: PartyPlanner-party
 -- ------------------------------------------------------
 -- Server version	5.7.31
 
@@ -55,7 +55,7 @@ CREATE TABLE `venue` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping routines for database 'getground-party'
+-- Dumping routines for database 'PartyPlanner-party'
 --
 /*!50003 DROP PROCEDURE IF EXISTS `AddGuest` */;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;

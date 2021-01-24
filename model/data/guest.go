@@ -37,5 +37,6 @@ func ParseRequestGuest(r *http.Request) (Guest, error) {
 	if err != nil {
 		return Guest{}, err
 	}
+
 	return g, nil
 }

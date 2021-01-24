@@ -1,8 +1,8 @@
 package main
 
 import (
-	"github.com/benacook/GetGround-Assignment/controller"
-	"github.com/benacook/GetGround-Assignment/model/database"
+	"github.com/benacook/PartyPlanner-Assignment/controller"
+	"github.com/benacook/PartyPlanner-Assignment/model/database"
 	"log"
 	"net/http"
 )

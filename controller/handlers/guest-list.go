@@ -1,8 +1,8 @@
 package handlers
 
 import (
-	"github.com/benacook/GetGround-Assignment/model"
-	"github.com/benacook/GetGround-Assignment/model/data"
+	"github.com/benacook/PartyPlanner-Assignment/model"
+	"github.com/benacook/PartyPlanner-Assignment/model/data"
 	"github.com/gorilla/mux"
 	"log"
 	"net/http"
@@ -37,7 +37,7 @@ func (h *GuestListHandler) Get(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	gl := data.GuestList{guests}
+	gl := data.GuestList{Guests: guests}
 	encodeResponseAsJSON(gl, http.StatusOK, w)
 }
 

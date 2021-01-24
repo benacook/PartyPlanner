@@ -4,7 +4,7 @@ import (
 	"database/sql"
 	"errors"
 	"github.com/DATA-DOG/go-sqlmock"
-	"github.com/benacook/GetGround-Assignment/model/data"
+	"github.com/benacook/PartyPlanner-Assignment/model/data"
 	_"github.com/go-sql-driver/mysql"
 	"log"
 	"time"

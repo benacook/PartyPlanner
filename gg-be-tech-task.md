@@ -2,7 +2,7 @@
 
 Hopefully this tech task allows you to strut your stuff as much as you decide to!
 
-We'd like to implement a guestlist service for the GetGround year end party!
+We'd like to implement a guestlist service for the PartyPlanner year end party!
 We haven't decide on the venue yet so the number of tables and the capacity are subject to change.
 
 Before the party, we should be able to add and remove guests with their entourages from our guest list and generate a nice looking invitation for the invited guests. 

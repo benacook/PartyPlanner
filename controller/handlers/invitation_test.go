@@ -1,7 +1,7 @@
 package handlers
 
 import (
-	"github.com/benacook/GetGround-Assignment/model/database"
+	"github.com/benacook/PartyPlanner-Assignment/model/database"
 	"github.com/gorilla/mux"
 	"log"
 	"net/http"

@@ -166,7 +166,7 @@ func TestSprocGetGuestsAtTable(t *testing.T) {
 	m := NewMock()
  	m.MockSprocGetGuestsAtTable(g.TableNumber)
 
-	r, err := SprocGetGuestsAtTable(1)
+	r, err := SprocGetGuestsAtTable(g.TableNumber)
 	if err != nil {
 		t.Fatal(err)
 	}

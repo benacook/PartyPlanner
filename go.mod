@@ -1,4 +1,4 @@
-module github.com/benacook/GetGround-Assignment
+module github.com/benacook/PartyPlanner-Assignment
 
 go 1.15
 
